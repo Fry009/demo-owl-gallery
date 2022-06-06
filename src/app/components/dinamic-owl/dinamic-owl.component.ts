@@ -34,7 +34,14 @@ export class DinamicOwlComponent implements OnInit {
     constructor(private owlService: OwlServiceService) {
       this.selectedItem = 1;
       this.currentSlide = 1;
-      this.slidesStore = [];
+      this.slidesStore = [
+        {
+          id: '2',  
+          src:'/assets/images/casaPequeña.PNG',
+          alt:'casaPequeña',
+          title:'casaPequeña'
+        }
+      ];
   
     }
   
@@ -48,6 +55,18 @@ export class DinamicOwlComponent implements OnInit {
             src: photoItem.Uri
           }
           this.slidesStore.push(item);
+        })
+        this.owlService.getPhotoAlbum2().subscribe(data =>{
+          debugger;
+          data.data.imagenes.forEach((photoItem:any) => {
+            let item = {
+              id:photoItem.FkPropiedad,
+              alt:photoItem.FkPropiedad,
+              title: photoItem.FkPropiedad,
+              src: photoItem.Uri
+            }
+            this.slidesStore.push(item);
+          })
         })
       })
     }
